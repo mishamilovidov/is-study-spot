@@ -12,5 +12,8 @@ namespace ISStudySpot.Models
         public int ClassId { get; set; }
         public int StudentId { get; set; }
         public int TeacherId { get; set; }
+        public int ClassNoteSectionTypeId { get; set; }
+
+        public virtual ClassNoteSectionTypes ClassNoteSectionType { get; set; }
     }
 }
