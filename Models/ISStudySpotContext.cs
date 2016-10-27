@@ -72,15 +72,32 @@ namespace ISStudySpot.Models
                     .ValueGeneratedOnAddOrUpdate();
             });
 
+            modelBuilder.Entity<ClassNoteSectionTypes>(entity =>
+            {
+                entity.HasKey(e => e.ClassNoteSectionTypeId)
+                    .HasName("Class_Note_Section_Type_PK");
+
+                entity.ToTable("Class_Note_Section_Types");
+
+                entity.Property(e => e.ClassNoteSectionTypeId)
+                    .HasColumnName("ClassNoteSectionTypeID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ClassNoteSectionTypeDescription).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<ClassNoteSections>(entity =>
             {
-                entity.HasKey(e => new { e.ClassNoteSectionId, e.ClassId, e.TeacherId, e.StudentId })
+                entity.HasKey(e => new { e.ClassNoteSectionId, e.ClassId, e.TeacherId, e.StudentId, e.ClassNoteSectionTypeId })
                     .HasName("Class_Note_Sections_PK");
 
                 entity.ToTable("Class_Note_Sections");
 
                 entity.HasIndex(e => e.ClassId)
                     .HasName("ClassID");
+
+                entity.HasIndex(e => e.ClassNoteSectionTypeId)
+                    .HasName("ClassNoteSectionTypeID");
 
                 entity.HasIndex(e => e.StudentId)
                     .HasName("StudentID");
@@ -96,6 +113,8 @@ namespace ISStudySpot.Models
 
                 entity.Property(e => e.StudentId).HasColumnName("StudentID");
 
+                entity.Property(e => e.ClassNoteSectionTypeId).HasColumnName("ClassNoteSectionTypeID");
+
                 entity.Property(e => e.ClassNoteSectionCreateDate).HasColumnType("smalldatetime");
 
                 entity.Property(e => e.ClassNoteSectionTitle).HasMaxLength(50);
@@ -103,6 +122,12 @@ namespace ISStudySpot.Models
                 entity.Property(e => e.ClassNoteSectionUpdateDate)
                     .HasColumnType("timestamp")
                     .ValueGeneratedOnAddOrUpdate();
+
+                entity.HasOne(d => d.ClassNoteSectionType)
+                    .WithMany(p => p.ClassNoteSections)
+                    .HasForeignKey(d => d.ClassNoteSectionTypeId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("Class_Note_Sections_FK03");
             });
 
             modelBuilder.Entity<ClassNotes>(entity =>
@@ -142,34 +167,28 @@ namespace ISStudySpot.Models
 
             modelBuilder.Entity<Classes>(entity =>
             {
-                entity.HasKey(e => new { e.ClassId, e.SemesterId, e.TeacherId })
+                entity.HasKey(e => new { e.ClassId, e.SubjectId, e.SemesterId, e.TeacherId })
                     .HasName("Classes_PK");
 
-                entity.HasIndex(e => e.ClassCode)
-                    .HasName("ClassCode")
-                    .IsUnique();
+                entity.HasIndex(e => e.ClassId)
+                    .HasName("ClassesClasses");
 
                 entity.HasIndex(e => e.SemesterId)
-                    .HasName("SemesterID");
+                    .HasName("SemestersClasses");
+
+                entity.HasIndex(e => e.SubjectId)
+                    .HasName("SubjectsClasses");
 
                 entity.HasIndex(e => e.TeacherId)
-                    .HasName("TeacherID");
+                    .HasName("TeachersClasses");
 
-                entity.Property(e => e.ClassId)
-                    .HasColumnName("ClassID")
-                    .HasDefaultValueSql("0");
+                entity.Property(e => e.ClassId).HasColumnName("ClassID");
+
+                entity.Property(e => e.SubjectId).HasColumnName("SubjectID");
 
                 entity.Property(e => e.SemesterId).HasColumnName("SemesterID");
 
                 entity.Property(e => e.TeacherId).HasColumnName("TeacherID");
-
-                entity.Property(e => e.ClassCode)
-                    .IsRequired()
-                    .HasMaxLength(8);
-
-                entity.Property(e => e.ClassDescription).HasColumnType("ntext");
-
-                entity.Property(e => e.ClassName).HasMaxLength(50);
             });
 
             modelBuilder.Entity<ForgotPasswords>(entity =>
@@ -324,6 +343,28 @@ namespace ISStudySpot.Models
                 entity.Property(e => e.StudZipCode).HasMaxLength(5);
             });
 
+            modelBuilder.Entity<Subjects>(entity =>
+            {
+                entity.HasKey(e => e.SubjectId)
+                    .HasName("Subjects_PK");
+
+                entity.HasIndex(e => e.SubjectCode)
+                    .HasName("ClassCode")
+                    .IsUnique();
+
+                entity.Property(e => e.SubjectId)
+                    .HasColumnName("SubjectID")
+                    .HasDefaultValueSql("0");
+
+                entity.Property(e => e.SubjectCode)
+                    .IsRequired()
+                    .HasMaxLength(8);
+
+                entity.Property(e => e.SubjectDescription).HasColumnType("ntext");
+
+                entity.Property(e => e.SubjectName).HasMaxLength(50);
+            });
+
             modelBuilder.Entity<TeacherClasses>(entity =>
             {
                 entity.HasKey(e => new { e.ClassId, e.TeacherId })
@@ -379,6 +420,7 @@ namespace ISStudySpot.Models
         }
         public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<ClassNoteComments> ClassNoteComments { get; set; }
+        public virtual DbSet<ClassNoteSectionTypes> ClassNoteSectionTypes { get; set; }
         public virtual DbSet<ClassNoteSections> ClassNoteSections { get; set; }
         public virtual DbSet<ClassNotes> ClassNotes { get; set; }
         public virtual DbSet<Classes> Classes { get; set; }
@@ -388,7 +430,9 @@ namespace ISStudySpot.Models
         public virtual DbSet<StudentClassStatus> StudentClassStatus { get; set; }
         public virtual DbSet<StudentClasses> StudentClasses { get; set; }
         public virtual DbSet<Students> Students { get; set; }
+        public virtual DbSet<Subjects> Subjects { get; set; }
         public virtual DbSet<TeacherClasses> TeacherClasses { get; set; }
         public virtual DbSet<Teachers> Teachers { get; set; }
+        public virtual DbSet<SemesterClasses> SemesterClasses { get; set; }
     }
 }

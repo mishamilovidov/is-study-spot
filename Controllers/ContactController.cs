@@ -7,14 +7,9 @@ using ISStudySpot.Models;
 
 namespace ISStudySpot.Controllers
 {
-    public class HomeController : Controller
+    public class ContactController : Controller
     {
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Error()
         {
             return View();
         }
