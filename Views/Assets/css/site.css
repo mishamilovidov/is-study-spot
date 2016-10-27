@@ -128,3 +128,8 @@ span.rent-text {
         float: left !important;  
        } 
     }
+
+.buttonspacing {
+
+    margin-top: 15px;
+}

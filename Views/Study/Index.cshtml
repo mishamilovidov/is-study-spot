@@ -6,15 +6,17 @@
 }
 
 <div class="jumbotron">
-    <h2>@ViewData["Title"]</h2>
+    <h2>Semesters information available</h2>
 
     <div class="row">
         <div class="col-md-12">
+            <div class="row">
             @foreach (var item in Model)
             {
                 ViewBag.ID = item.SemesterId;
-                <a asp-controller="study" asp-action="semesters" asp-route-id="@ViewBag.ID"><p>@Html.DisplayFor(modelItem => item.SemesterName)</p></a>
+               <div class="col-lg-6 buttonspacing"><button type="button" class="btn btn-default btn-block"> <a asp-controller="study" asp-action="semesters" asp-route-id="@ViewBag.ID"><h4>@Html.DisplayFor(modelItem => item.SemesterName)</h4></a></button></div>
             }
+            </div>
         </div>
     </div>
 </div>
