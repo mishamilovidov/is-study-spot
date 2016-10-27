@@ -1,9 +1,9 @@
-@model IEnumerable<ISStudySpot.Models.SemesterClasses>
+@model IEnumerable<ISStudySpot.Models.ClassInfo>
 
 @{
     foreach (var item in Model)
     {
-        ViewBag.Semester = item.SemesterName;
+        ViewBag.Semester = item.SubjectCode;
     }
 
     ViewData["Title"] = @ViewBag.Semester;
@@ -17,11 +17,8 @@
             @foreach (var item in Model)
             {
                 ViewBag.ID = item.ClassId;
-                <a asp-controller="classes" asp-action="class" asp-route-id="@ViewBag.ID">
-                    <p>@Html.DisplayFor(modelItem => item.SubjectCode) - @Html.DisplayFor(modelItem => item.SubjectName)</p>
-                </a>
+                    <p>@Html.DisplayFor(modelItem => item.ClassNoteSectionTypeDescription) - @Html.DisplayFor(modelItem => item.ClassNoteSectionTitle)</p>
             }
         </div>
     </div>
 </div>
-

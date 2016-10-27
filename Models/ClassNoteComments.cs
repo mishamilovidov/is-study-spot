@@ -12,5 +12,6 @@ namespace ISStudySpot.Models
         public int ClassNoteId { get; set; }
         public int StudentId { get; set; }
         public int TeacherId { get; set; }
+        public string ClassNoteCommentText { get; set; }
     }
 }

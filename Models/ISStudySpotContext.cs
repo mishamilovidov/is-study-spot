@@ -67,6 +67,8 @@ namespace ISStudySpot.Models
 
                 entity.Property(e => e.ClassNoteCommentTitle).HasMaxLength(50);
 
+                entity.Property(e => e.ClassNoteCommentText).HasColumnType("text");
+
                 entity.Property(e => e.ClassNoteCommentUpdateDate)
                     .HasColumnType("timestamp")
                     .ValueGeneratedOnAddOrUpdate();
