@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ISStudySpot.Models
 {
-    public partial class ClassInfo
+    public partial class ClassInformation
     {
         [Key]
         public int ClassId { get; set; }

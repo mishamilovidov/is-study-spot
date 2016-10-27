@@ -25,7 +25,7 @@ namespace ISStudySpot.Controllers
 
         public IActionResult Class(int? id)
         {
-            IEnumerable<ClassInfo> classinformation = _context.ClassInfo.FromSql(
+            IEnumerable<ClassInformation> classinformation = _context.ClassInformation.FromSql(
             "SELECT Classes.ClassID, Subjects.SubjectCode, Subjects.SubjectName, Subjects.SubjectDescription, " +
             "Class_Note_Sections.ClassNoteSectionID,Class_Note_Sections.ClassNoteSectionTitle, Class_Note_Sections.ClassNoteSectionCreateDate, " +
             "Class_Note_Sections.ClassNoteSectionUpdateDate, Class_Note_Section_Types.ClassNoteSectionTypeID, " +
