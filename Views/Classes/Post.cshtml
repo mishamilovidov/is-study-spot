@@ -1,0 +1,40 @@
+@model IEnumerable<ISStudySpot.Models.PostInformation>
+
+@{
+    foreach (var item in Model)
+    {
+        ViewBag.ClassNoteTitle = item.ClassNoteTitle;
+        ViewBag.StudFirstName = item.StudFirstName;
+        ViewBag.StudLastName = item.StudLastName;
+        ViewBag.ClassNoteCreateDate = item.ClassNoteCreateDate;
+        ViewBag.ClassNoteText = item.ClassNoteText;
+    }
+
+    ViewData["Title"] = @ViewBag.ClassNoteTitle;
+}
+
+<div class="jumbotron">
+    <h2>@ViewData["Title"]</h2>
+    <h5>Submitted by @ViewBag.StudFirstName @ViewBag.StudLastName - @ViewBag.ClassNoteCreateDate</h5>
+
+    <div class="row class-note-text">
+        <div class="col-md-12 well">
+            <p>@ViewBag.ClassNoteText</p>
+        </div>
+    </div>
+    <div class="row class-note-commment-area">
+        <div class="col-md-12">
+            <h4>Comments:</h4>
+            <hr/>
+            @foreach (var item in Model)
+            {
+                <div class="row class-note-commment-text">
+                    <h5>Submitted by @item.CommentorFName @item.CommentorLName - @item.ClassNoteCommentCreateDate</h5>
+                    <div class="col-md-12 well">
+                        <p>@item.ClassNoteCommentText</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

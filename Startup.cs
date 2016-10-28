@@ -76,6 +76,10 @@ namespace ISStudySpot
                     template: "{controller=Classes}/{action=studyresources}/{id?}");
 
                 routes.MapRoute(
+                    name: "post",
+                    template: "{controller=Classes}/{action=post}/{id?}");
+
+                routes.MapRoute(
                     name: "about",
                     template: "{controller=About}/{action=Index}/{id?}");
 

@@ -436,5 +436,6 @@ namespace ISStudySpot.Models
         public virtual DbSet<Teachers> Teachers { get; set; }
         public virtual DbSet<SemesterClasses> SemesterClasses { get; set; }
         public virtual DbSet<ClassInformation> ClassInformation { get; set; }
+        public virtual DbSet<PostInformation> PostInformation { get; set; }
     }
 }
