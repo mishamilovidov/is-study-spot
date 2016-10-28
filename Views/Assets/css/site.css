@@ -129,7 +129,13 @@ span.rent-text {
        } 
     }
 
+.buttonspacing {
+
+    margin-top: 15px;
+}
+
 .section-content {
     padding-right: 30px;
     padding-left: 30px;
+
 }

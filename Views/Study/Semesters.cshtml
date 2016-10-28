@@ -14,14 +14,26 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="row">
             @foreach (var item in Model)
             {
                 ViewBag.ID = item.ClassId;
-                <a asp-controller="classes" asp-action="studyresources" asp-route-id="@ViewBag.ID">
-                    <p>@Html.DisplayFor(modelItem => item.SubjectCode) - @Html.DisplayFor(modelItem => item.SubjectName)</p>
-                </a>
+                <div class="col-lg-6 buttonspacing">
+                   <div class="well text-center"> 
+                    <H3>@Html.DisplayFor(modelItem => item.SubjectCode) - @Html.DisplayFor(modelItem => item.SubjectName)</H3>
+                    <H5>@Html.DisplayFor(modelItem => item.TeachFirstName) @Html.DisplayFor(modelItem => item.TeachLastname)</H5>
+                    <button type="button" class="btn btn-default"><a asp-controller="classes" asp-action="class" asp-route-id="@ViewBag.ID">
+                        Study resources</a></button>  
+                   </div>
+                </div>
             }
+            </div>
         </div>
     </div>
 </div>
 
+
+
+
+
+           
