@@ -158,3 +158,18 @@ span.rent-text {
 .subject-name {
     margin-top:10px;
 }
+
+.class-note-text {
+    margin-right:0px;
+    margin-left:0px;
+}
+
+.class-note-commment-area {
+    margin-right:0px;
+    margin-left:10px;
+}
+
+.class-note-commment-text{
+    margin-right:0px;
+    margin-left:15px;
+}
