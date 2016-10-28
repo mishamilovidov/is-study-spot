@@ -35,7 +35,8 @@ namespace ISStudySpot.Controllers
             "INNER JOIN Teachers ON Teachers.TeacherID = Class_Notes.TeacherID " +
             "INNER JOIN Students ON Students.StudentID = Class_Notes.StudentID " +
             "INNER JOIN Semesters ON Semesters.SemesterID = Classes.SemesterID " +
-            "WHERE Classes.ClassID = " + id
+            "WHERE Classes.ClassID = " + id +
+            " ORDER BY ClassNoteCreateDate DESC"
             );
 
             return View(classinformation);

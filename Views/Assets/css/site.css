@@ -1,14 +1,18 @@
 body {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 20px;
 }
 
+/*.container {
+    width:1400px;
+}*/
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+/*.body-content {
+    padding-left: 35px;
+    padding-right: 35px;
+}*/
 
 .navbar-brand {
     font-size: 1.8em;
@@ -138,4 +142,19 @@ span.rent-text {
     padding-right: 30px;
     padding-left: 30px;
 
+}
+
+.navbar {
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.container.jumbotron{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.subject-name {
+    margin-top:10px;
 }
