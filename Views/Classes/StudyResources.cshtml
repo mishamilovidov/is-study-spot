@@ -16,163 +16,257 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingHomework">
-                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Homework" aria-expanded="false" aria-controls="Homework">
-                            <h4 class="panel-title">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        Homework
-                                    </div>
-                                </div>
-                            </h4>
-                        </a>
-                    </div>
-                    <div id="Homework" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHomework">
-                        <div class="panel-body section-content">
-                            @foreach (var item in Model)
-                            {
-                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
-
-                                if (@ViewBag.ClassNoteSectionTypeDescription == "Homework")
-                                {
-                                    <h3>@item.ClassNoteTitle</h3>
-                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p>@item.ClassNoteText</p>
+                <div class="row">
+                    <div class="col-md-4 buttonspacing">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingHomework">
+                                <a role="button" data-toggle="collapse" data-parent="accordion" href="#Homework" aria-expanded="true" aria-controls="Homework">
+                                    <h4 class="panel-title">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                Homework
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-                            }
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="Homework" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingHomework">
+                                <div class="panel-body section-content">
+                                    <hr/>
+                                    @{
+                                        int homework_counter = 0;
+                                        @foreach (var item in Model)
+                                        {
+                                            ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                            if (@ViewBag.ClassNoteSectionTypeDescription == "Homework" && homework_counter < 2)
+                                            {
+                                                <h3>@item.ClassNoteTitle</h3>
+                                                <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @{
+                                                            if (@item.ClassNoteText.ToString().Length > 80)
+                                                            {
+                                                                <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p>@item.ClassNoteText</p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <hr/>
+
+                                                homework_counter++;
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 buttonspacing">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingQuizzes">
+                                <a role="button" data-toggle="collapse" data-parent="accordion" href="#Quizzes" aria-expanded="true" aria-controls="Quizzes">
+                                    <h4 class="panel-title">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                Quizzes
+                                            </div>
+                                        </div>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="Quizzes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingQuizzes">
+                                <div class="panel-body section-content">
+                                    <hr/>
+                                    @{
+                                        int quiz_counter = 0;
+                                        @foreach (var item in Model)
+                                        {
+                                            ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                            if (@ViewBag.ClassNoteSectionTypeDescription == "Quizzes" && quiz_counter < 2)
+                                            {
+                                                <h3>@item.ClassNoteTitle</h3>
+                                                <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @{
+                                                            if (@item.ClassNoteText.ToString().Length > 80)
+                                                            {
+                                                                <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p>@item.ClassNoteText</p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <hr/>
+
+                                                quiz_counter++;
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 buttonspacing">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingProjects">
+                                <a role="button" data-toggle="collapse" data-parent="accordion" href="#Projects" aria-expanded="true" aria-controls="Projects">
+                                    <h4 class="panel-title">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                Projects
+                                            </div>
+                                        </div>
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="Projects" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingProjects">
+                                <div class="panel-body section-content">
+                                    <hr/>
+                                    @{
+                                        int project_counter = 0;
+                                        @foreach (var item in Model)
+                                        {
+                                            ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                            if (@ViewBag.ClassNoteSectionTypeDescription == "Projects" && project_counter < 2)
+                                            {
+                                                <h3>@item.ClassNoteTitle</h3>
+                                                <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @{
+                                                            if (@item.ClassNoteText.ToString().Length > 80)
+                                                            {
+                                                                <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p>@item.ClassNoteText</p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <hr/>
+
+                                                project_counter++;
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingQuizzes">
-                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Quizzes" aria-expanded="false" aria-controls="Quizzes">
-                            <h4 class="panel-title">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        Quizzes
-                                    </div>
-                                </div>
-                            </h4>
-                        </a>
-                    </div>
-                    <div id="Quizzes" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingQuizzes">
-                        <div class="panel-body section-content">
-                            @foreach (var item in Model)
-                            {
-                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
-
-                                if (@ViewBag.ClassNoteSectionTypeDescription == "Quizzes")
-                                {
-                                    <h3>@item.ClassNoteTitle</h3>
-                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p>@item.ClassNoteText</p>
+                <div class="row">
+                    <div class="col-md-6 buttonspacing">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingMidterms">
+                                <a role="button" data-toggle="collapse" data-parent="accordion" href="#Midterms" aria-expanded="true" aria-controls="Midterms">
+                                    <h4 class="panel-title">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                Midterms
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-                            }
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="Midterms" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMidterms">
+                                <div class="panel-body section-content">
+                                    <hr/>
+                                    @{
+                                        int midterm_counter = 0;
+                                        @foreach (var item in Model)
+                                        {
+                                            ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                            if (@ViewBag.ClassNoteSectionTypeDescription == "Midterms" && midterm_counter < 2)
+                                            {
+                                                <h3>@item.ClassNoteTitle</h3>
+                                                <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @{
+                                                            if (@item.ClassNoteText.ToString().Length > 80)
+                                                            {
+                                                                <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p>@item.ClassNoteText</p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <hr/>
+
+                                                midterm_counter++;
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingProjects">
-                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Projects" aria-expanded="false" aria-controls="Projects">
-                            <h4 class="panel-title">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        Projects
-                                    </div>
-                                </div>
-                            </h4>
-                        </a>
-                    </div>
-                    <div id="Projects" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingProjects">
-                        <div class="panel-body section-content">
-                            @foreach (var item in Model)
-                            {
-                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
-
-                                if (@ViewBag.ClassNoteSectionTypeDescription == "Projects")
-                                {
-                                    <h3>@item.ClassNoteTitle</h3>
-                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p>@item.ClassNoteText</p>
+                    <div class="col-md-6 buttonspacing">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFinal">
+                                <a role="button" data-toggle="collapse" data-parent="accordion" href="#Final" aria-expanded="true" aria-controls="Final">
+                                    <h4 class="panel-title">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                Final
+                                            </div>
                                         </div>
-                                    </div>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingMidterms">
-                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Midterms" aria-expanded="false" aria-controls="Midterms">
-                            <h4 class="panel-title">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        Midterms
-                                    </div>
-                                </div>
-                            </h4>
-                        </a>
-                    </div>
-                    <div id="Midterms" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMidterms">
-                        <div class="panel-body section-content">
-                            @foreach (var item in Model)
-                            {
-                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+                                    </h4>
+                                </a>
+                            </div>
+                            <div id="Final" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFinal">
+                                <div class="panel-body section-content">
+                                    <hr/>
+                                    @{
+                                        int final_counter = 0;
+                                        @foreach (var item in Model)
+                                        {
+                                            ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
 
-                                if (@ViewBag.ClassNoteSectionTypeDescription == "Midterms")
-                                {
-                                    <h3>@item.ClassNoteTitle</h3>
-                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p>@item.ClassNoteText</p>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingFinal">
-                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Final" aria-expanded="false" aria-controls="Final">
-                            <h4 class="panel-title">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        Final
-                                    </div>
-                                </div>
-                            </h4>
-                        </a>
-                    </div>
-                    <div id="Final" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFinal">
-                        <div class="panel-body section-content">
-                            @foreach (var item in Model)
-                            {
-                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+                                            if (@ViewBag.ClassNoteSectionTypeDescription == "Final" && final_counter < 2)
+                                            {
+                                                <h3>@item.ClassNoteTitle</h3>
+                                                <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @{
+                                                            if (@item.ClassNoteText.ToString().Length > 80)
+                                                            {
+                                                                <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p>@item.ClassNoteText</p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <hr/>
 
-                                if (@ViewBag.ClassNoteSectionTypeDescription == "Final")
-                                {
-                                    <h3>@item.ClassNoteTitle</h3>
-                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <p>@item.ClassNoteText</p>
-                                        </div>
-                                    </div>
-                                }
-                            }
+                                                final_counter++;
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
