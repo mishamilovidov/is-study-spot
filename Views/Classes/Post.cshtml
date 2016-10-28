@@ -22,6 +22,12 @@
             <p>@ViewBag.ClassNoteText</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#MyModal">Reply</button>
+        </div>
+    </div>
+
     <div class="row class-note-commment-area">
         <div class="col-md-12">
             <h4>Comments:</h4>
@@ -37,4 +43,31 @@
             }
         </div>
     </div>
+
+
+
+    <div id="MyModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">@ViewBag.ClassNoteTitle</h3>
+			</div>
+			<div class="modal-body">
+                <div class="row class-note-text">
+                    <div class="col-md-12 well">
+                        <p>@ViewBag.ClassNoteText</p>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-default">Submit</button>
+			</div>
+		</div>
+	</div>
+</div> 
 </div>
+
