@@ -1,0 +1,182 @@
+@model IEnumerable<ISStudySpot.Models.ClassInformation>
+
+@{
+    foreach (var item in Model)
+    {
+        ViewBag.SubjectCode = item.SubjectCode;
+        ViewBag.SemesterName = item.SemesterName;
+    }
+
+    ViewData["Title"] = @ViewBag.SubjectCode;
+}
+
+<div class="jumbotron">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingHomework">
+                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Homework" aria-expanded="false" aria-controls="Homework">
+                            <h4 class="panel-title">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        Homework
+                                    </div>
+                                </div>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="Homework" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingHomework">
+                        <div class="panel-body section-content">
+                            @foreach (var item in Model)
+                            {
+                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                if (@ViewBag.ClassNoteSectionTypeDescription == "Homework")
+                                {
+                                    <h3>@item.ClassNoteTitle</h3>
+                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>@item.ClassNoteText</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingQuizzes">
+                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Quizzes" aria-expanded="false" aria-controls="Quizzes">
+                            <h4 class="panel-title">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        Quizzes
+                                    </div>
+                                </div>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="Quizzes" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingQuizzes">
+                        <div class="panel-body section-content">
+                            @foreach (var item in Model)
+                            {
+                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                if (@ViewBag.ClassNoteSectionTypeDescription == "Quizzes")
+                                {
+                                    <h3>@item.ClassNoteTitle</h3>
+                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>@item.ClassNoteText</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingProjects">
+                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Projects" aria-expanded="false" aria-controls="Projects">
+                            <h4 class="panel-title">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        Projects
+                                    </div>
+                                </div>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="Projects" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingProjects">
+                        <div class="panel-body section-content">
+                            @foreach (var item in Model)
+                            {
+                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                if (@ViewBag.ClassNoteSectionTypeDescription == "Projects")
+                                {
+                                    <h3>@item.ClassNoteTitle</h3>
+                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>@item.ClassNoteText</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingMidterms">
+                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Midterms" aria-expanded="false" aria-controls="Midterms">
+                            <h4 class="panel-title">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        Midterms
+                                    </div>
+                                </div>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="Midterms" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMidterms">
+                        <div class="panel-body section-content">
+                            @foreach (var item in Model)
+                            {
+                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                if (@ViewBag.ClassNoteSectionTypeDescription == "Midterms")
+                                {
+                                    <h3>@item.ClassNoteTitle</h3>
+                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>@item.ClassNoteText</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFinal">
+                        <a role="button" data-toggle="collapse" data-parent="accordion" href="#Final" aria-expanded="false" aria-controls="Final">
+                            <h4 class="panel-title">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        Final
+                                    </div>
+                                </div>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="Final" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFinal">
+                        <div class="panel-body section-content">
+                            @foreach (var item in Model)
+                            {
+                                ViewBag.ClassNoteSectionTypeDescription = item.ClassNoteSectionTypeDescription;
+
+                                if (@ViewBag.ClassNoteSectionTypeDescription == "Final")
+                                {
+                                    <h3>@item.ClassNoteTitle</h3>
+                                    <h5>Submitted by @item.StudFirstName @item.StudLastName</h5>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>@item.ClassNoteText</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

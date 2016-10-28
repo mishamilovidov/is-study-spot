@@ -65,7 +65,6 @@ namespace ISStudySpot.Models
 
                 entity.Property(e => e.ClassNoteCommentCreateDate).HasColumnType("smalldatetime");
 
-                entity.Property(e => e.ClassNoteCommentTitle).HasMaxLength(50);
 
                 entity.Property(e => e.ClassNoteCommentText).HasColumnType("text");
 

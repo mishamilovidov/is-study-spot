@@ -1,8 +1,11 @@
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "IS Study Spot";
 }
 
 <div class="jumbotron">
-    <h2>@ViewData["Title"]</h2>
-    <p>Welcome to the unofficial BYU Information Systems student help page!</p>
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <p class="text-center"><i>The best place for BYU IS Junior Core students to collaborate and study</i></p>
+    <a asp-controller="study" asp-action="index" asp-route-id="">
+        <button type="button" class="btn btn-primary center-block">Study Now</button>
+    </a>
 </div>
