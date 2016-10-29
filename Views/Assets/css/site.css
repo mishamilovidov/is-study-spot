@@ -3,17 +3,6 @@ body {
     padding-bottom: 20px;
 }
 
-/*.container {
-    width:1400px;
-}*/
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-/*.body-content {
-    padding-left: 35px;
-    padding-right: 35px;
-}*/
-
 .navbar-brand {
     font-size: 1.8em;
     font-weight: bold;
@@ -191,4 +180,26 @@ span.rent-text {
 
 .breadcrumb>li+li:before {
     content: "\007C\00a0";
+}
+
+.form-horizontal .control-label {
+    margin-bottom: 5px;
+}
+
+div.alert.alert-danger.contact-alerts {
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top:5px;
+}
+
+.field-validation-error {
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: inline-block;
 }
