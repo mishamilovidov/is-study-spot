@@ -27,6 +27,7 @@ namespace ISStudySpot.Models
         public string StudLastName { get; set; }
         public string TeachFirstName { get; set; }
         public string TeachLastname { get; set; }
+        public int SemesterId { get; set; }
         public string SemesterName { get; set; }
         public DateTime? SemesterStartDate { get; set; }
         public DateTime? SemesterEndDate { get; set; }

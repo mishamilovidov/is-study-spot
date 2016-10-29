@@ -8,66 +8,110 @@
         ViewBag.StudLastName = item.StudLastName;
         ViewBag.ClassNoteCreateDate = item.ClassNoteCreateDate;
         ViewBag.ClassNoteText = item.ClassNoteText;
+        ViewBag.ClassNoteCommentId = item.ClassNoteCommentId;
+        ViewBag.SemesterId = item.SemesterId;
+        ViewBag.SemesterName = item.SemesterName;
+        ViewBag.SubjectCode = item.SubjectCode;
+        ViewBag.ClassId = item.ClassId;
     }
 
     ViewData["Title"] = @ViewBag.ClassNoteTitle;
 }
 
-<div class="jumbotron">
-    <h2>@ViewData["Title"]</h2>
-    <h5>Submitted by @ViewBag.StudFirstName @ViewBag.StudLastName - @ViewBag.ClassNoteCreateDate</h5>
-
-    <div class="row class-note-text">
-        <div class="col-md-12 well">
-            <p>@ViewBag.ClassNoteText</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#MyModal">Reply</button>
-        </div>
-    </div>
-
-    <div class="row class-note-commment-area">
-        <div class="col-md-12">
-            <h4>Comments:</h4>
-            <hr/>
-            @foreach (var item in Model)
+@if (Model != null)
+{
+    <div class="jumbotron">
+        @{
+            if (@ViewBag.Breadcrumbs == "semesters")
             {
-                <div class="row class-note-commment-text">
-                    <h5>Submitted by @item.CommentorFName @item.CommentorLName - @item.ClassNoteCommentCreateDate</h5>
-                    <div class="col-md-12 well">
-                        <p>@item.ClassNoteCommentText</p>
-                    </div>
-                </div>
+                <ol class="breadcrumb">
+                    <li><a asp-area="" asp-controller="home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="study" asp-action="Index">Semesters</a></li>
+                    <li><a asp-area="" asp-controller="study" asp-action="Semesters" asp-route-id="@ViewBag.SemesterId">@ViewBag.SemesterName</a></li>
+                    <li><a asp-area="" asp-controller="classes" asp-action="studyresources" asp-route-id="@ViewBag.ClassId" asp-route-name="semester-route">@ViewBag.SubjectCode</a></li>
+                    <li class="active">@ViewData["Title"]</li>
+                </ol>
             }
+            if (@ViewBag.Breadcrumbs == "classes")
+            {
+
+                <ol class="breadcrumb">
+                    <li><a asp-area="" asp-controller="home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="classes" asp-action="Index">Classes</a></li>
+                    <li><a asp-area="" asp-controller="classes" asp-action="studyresources" asp-route-id="@ViewBag.ClassId" asp-route-name="class-route">@ViewBag.SubjectCode</a></li>
+                    <li class="active">@ViewData["Title"]</li>
+                </ol>
+            }
+        }
+
+        <h2>@ViewData["Title"]</h2>
+        <h5>Submitted by @ViewBag.StudFirstName @ViewBag.StudLastName - @ViewBag.ClassNoteCreateDate</h5>
+
+        <div class="row class-note-text">
+            <div class="col-md-12 well">
+                <p>@ViewBag.ClassNoteText</p>
+            </div>
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#MyModal"><span class="glyphicon glyphicon-comment" style="margin-right:5px;" aria-hidden="true"></span>  Comment</button>
+            </div>
         </div>
-    </div>
+
+        <div class="row class-note-commment-area">
+            <div class="col-md-12">
+                @if(@ViewBag.ClassNoteCommentId != 0)
+                {
+                    <h4>Comments:</h4>
+                    <hr/>
+                    @foreach (var item in Model)
+                    {
+                        <div class="row class-note-commment-text">
+                            <h5>Submitted by @item.CommentorFName @item.CommentorLName - @item.ClassNoteCommentCreateDate</h5>
+                            <div class="col-md-12 well">
+                                <p>@item.ClassNoteCommentText</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
 
 
-
-    <div id="MyModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h3 class="modal-title">@ViewBag.ClassNoteTitle</h3>
-			</div>
-			<div class="modal-body">
-                <div class="row class-note-text">
-                    <div class="col-md-12 well">
-                        <p>@ViewBag.ClassNoteText</p>
+        <!--Comment Modal-->
+        <div id="MyModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-adjustments">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">@ViewBag.ClassNoteTitle</h3>
+                        <h5>Submitted by @ViewBag.StudFirstName @ViewBag.StudLastName - @ViewBag.ClassNoteCreateDate</h5>
+                    </div>
+                    <div class="modal-body modal-body-adjustments">
+                        <div class="row class-note-text">
+                            <div class="col-md-12 well">
+                                <p>@ViewBag.ClassNoteText</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 comment-area">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="15" id="comment"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Post Comment <span class="glyphicon glyphicon-send" style="margin-left:5px;" aria-hidden="true"></span></button>
                     </div>
                 </div>
-				<div class="form-group">
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
-                </div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-default">Submit</button>
-			</div>
-		</div>
-	</div>
-</div> 
-</div>
+            </div>
+        </div> 
+
+    </div>
+}
+else
+{
+    <div class="jumbotron">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+}
 

@@ -5,12 +5,38 @@
     {
         ViewBag.SubjectCode = item.SubjectCode;
         ViewBag.SemesterName = item.SemesterName;
+        ViewBag.SemesterId = item.SemesterId;
     }
 
     ViewData["Title"] = @ViewBag.SubjectCode;
 }
 
 <div class="jumbotron">
+
+    @{
+        if (@ViewBag.Breadcrumbs == "semesters")
+        {
+            ViewBag.BreadcrumbsRoute = "semester-route";
+
+            <ol class="breadcrumb">
+                <li><a asp-area="" asp-controller="home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="study" asp-action="Index">Semesters</a></li>
+                <li><a asp-area="" asp-controller="study" asp-action="Semesters" asp-route-id="@ViewBag.SemesterId">@ViewBag.SemesterName</a></li>
+                <li class="active">@ViewData["Title"]</li>
+            </ol>
+        }
+        if (@ViewBag.Breadcrumbs == "classes")
+        {
+            ViewBag.BreadcrumbsRoute = "class-route";
+
+            <ol class="breadcrumb">
+                <li><a asp-area="" asp-controller="home" asp-action="Index">Home</a></li>
+                <li><a asp-area="" asp-controller="classes" asp-action="Index">Classes</a></li>
+                <li class="active">@ViewData["Title"]</li>
+            </ol>
+        }
+    }
+
     <h2>@ViewData["Title"]</h2>
 
     <div class="row">
@@ -52,12 +78,12 @@
                                                             if (@item.ClassNoteText.ToString().Length > 80)
                                                             {
                                                                 <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                             else
                                                             {
                                                                 <p>@item.ClassNoteText</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                         }
                                                     </div>
@@ -106,12 +132,12 @@
                                                             if (@item.ClassNoteText.ToString().Length > 80)
                                                             {
                                                                 <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                             else
                                                             {
                                                                 <p>@item.ClassNoteText</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                         }
                                                     </div>
@@ -160,12 +186,12 @@
                                                             if (@item.ClassNoteText.ToString().Length > 80)
                                                             {
                                                                 <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                             else
                                                             {
                                                                 <p>@item.ClassNoteText</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                         }
                                                     </div>
@@ -216,12 +242,12 @@
                                                             if (@item.ClassNoteText.ToString().Length > 80)
                                                             {
                                                                 <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                             else
                                                             {
                                                                 <p>@item.ClassNoteText</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                         }
                                                     </div>
@@ -270,12 +296,12 @@
                                                             if (@item.ClassNoteText.ToString().Length > 80)
                                                             {
                                                                 <p>@item.ClassNoteText.ToString().Substring(0,80)...</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                             else
                                                             {
                                                                 <p>@item.ClassNoteText</p>
-                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID">View/Comment</a>
+                                                                <a asp-controller="classes" asp-action="post" asp-route-id="@ViewBag.ID" asp-route-name="@ViewBag.BreadcrumbsRoute">View/Comment</a>
                                                             }
                                                         }
                                                     </div>

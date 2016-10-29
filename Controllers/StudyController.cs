@@ -26,10 +26,10 @@ namespace ISStudySpot.Controllers
             return View(semesters);
         }
 
-        public IActionResult Semesters(int? id, int? classID)
+        public IActionResult Semesters(int? id)
         {
             IEnumerable<SemesterClasses> classes = _context.SemesterClasses.FromSql(
-            "SELECT Classes.ClassID, Classes.SubjectID, Classes.SemesterID,Semesters.SemesterName, SemesterStartDate, SemesterEndDate, SubjectCode, SubjectName, SubjectDescription, Teachers.TeacherID, TeachFirstName, TeachLastname " +
+            "SELECT Classes.ClassID, Classes.SubjectID, Classes.SemesterID, Semesters.SemesterName, SemesterStartDate, SemesterEndDate, SubjectCode, SubjectName, SubjectDescription, Teachers.TeacherID, TeachFirstName, TeachLastname " +
             "FROM Classes " +
             "INNER JOIN Semesters ON Semesters.SemesterID = Classes.SemesterID " +
             "INNER JOIN Subjects ON Subjects.SubjectID = Classes.SubjectID " +

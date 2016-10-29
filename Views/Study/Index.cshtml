@@ -1,11 +1,16 @@
 @model IEnumerable<ISStudySpot.Models.Semesters>
 
 @{
-    ViewData["Title"] = "Study";
+    ViewData["Title"] = "Semesters";
 
 }
 
 <div class="jumbotron">
+    <ol class="breadcrumb">
+        <li><a asp-area="" asp-controller="home" asp-action="Index">Home</a></li>
+        <li class="active">@ViewData["Title"]</li>
+    </ol>
+    
     <h2>@ViewData["Title"]</h2>
 
     <div class="row">
