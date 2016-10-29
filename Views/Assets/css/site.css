@@ -173,3 +173,22 @@ span.rent-text {
     margin-right:0px;
     margin-left:15px;
 }
+
+.modal-header-adjustments {
+    padding:25px;
+    border-bottom: none;
+}
+
+.modal-body-adjustments {
+    margin-top: -25px;
+}
+
+.breadcrumb {
+    /*margin-left: -20px;
+    margin-top: -20px;*/
+    background-color: transparent;
+}
+
+.breadcrumb>li+li:before {
+    content: "\007C\00a0";
+}

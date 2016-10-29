@@ -21,5 +21,9 @@ namespace ISStudySpot.Models
         public string StudLastName { get; set; }
         public string CommentorFName { get; set; }
         public string CommentorLName { get; set; }
+        public string SemesterName { get; set; }
+        public string SubjectCode { get; set; }
+        public int ClassId { get; set; }
+        public int SemesterId { get; set; }
     }
 }

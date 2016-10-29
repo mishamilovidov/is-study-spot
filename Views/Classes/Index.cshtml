@@ -1,4 +1,4 @@
-@model IEnumerable<ISStudySpot.Models.Subjects>
+@model IEnumerable<ISStudySpot.Models.SemesterClasses>
 
 @{
     foreach (var item in Model)
@@ -6,21 +6,35 @@
         ViewBag.Semester = item.SubjectCode;
     }
 
-    ViewData["Title"] = @ViewBag.Semester;
+    ViewData["Title"] = "Classes";
 }
 
 <div class="jumbotron">
+    <ol class="breadcrumb">
+        <li><a asp-area="" asp-controller="home" asp-action="Index">Home</a></li>
+        <li class="active">@ViewData["Title"]</li>
+    </ol>
+    
     <h2>@ViewData["Title"]</h2>
 
     <div class="row">
         <div class="col-md-12">
+            <div class="row">
             @foreach (var item in Model)
             {
                 ViewBag.ID = item.ClassId;
-                <!--<a asp-controller="classes" asp-action="semester" asp-route-id="@ViewBag.ID">-->
-                    <p>@Html.DisplayFor(modelItem => item.SubjectCode) - @Html.DisplayFor(modelItem => item.SubjectName)</p>
-                <!--</a>-->
+                <div class="col-lg-6 buttonspacing">
+                   <div class="well text-center"> 
+                        <h4>@Html.DisplayFor(modelItem => item.SubjectCode) - @Html.DisplayFor(modelItem => item.SemesterName)</h4> 
+                        <h3 class="subject-name">@Html.DisplayFor(modelItem => item.SubjectName)</h3>
+                        <h5>Professor @Html.DisplayFor(modelItem => item.TeachFirstName) @Html.DisplayFor(modelItem => item.TeachLastname)</h5>
+                        <a asp-controller="classes" asp-action="studyresources" asp-route-id="@ViewBag.ID" asp-route-name="class-route">
+                            <button type="button" class="btn btn-primary">Study Resources</button>  
+                        </a>
+                   </div>
+                </div>
             }
+            </div>
         </div>
     </div>
 </div>
