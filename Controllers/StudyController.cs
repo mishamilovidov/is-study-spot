@@ -17,6 +17,7 @@ namespace ISStudySpot.Controllers
         	_context = context;
     	}
 
+        // List of Semesters View Controller
         public IActionResult Index()
         {
             IEnumerable<Semesters> semesters = _context.Semesters.FromSql(
@@ -26,6 +27,7 @@ namespace ISStudySpot.Controllers
             return View(semesters);
         }
 
+        // List of Classes in a Particular Semester
         public IActionResult Semesters(int? id)
         {
             IEnumerable<SemesterClasses> classes = _context.SemesterClasses.FromSql(

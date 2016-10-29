@@ -10,11 +10,13 @@ namespace ISStudySpot.Controllers
 {
     public class ContactController : Controller
     {
+        // Contact View Controller
         public IActionResult Index()
         {
             return View(new ContactView());
         }
 
+        // Capture Information from Contact Form and display confirmation page View Controller
         [HttpPost]
         public async Task<IActionResult> MessageSent(IFormCollection data)
         {

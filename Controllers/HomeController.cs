@@ -9,11 +9,13 @@ namespace ISStudySpot.Controllers
 {
     public class HomeController : Controller
     {
+        // Home View Controller
         public IActionResult Index()
         {
             return View();
         }
 
+        // Error View Controller
         public IActionResult Error()
         {
             return View();

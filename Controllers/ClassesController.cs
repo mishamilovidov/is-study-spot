@@ -17,6 +17,7 @@ namespace ISStudySpot.Controllers
         	_context = context;
     	}
 
+        // Displays list of all classes in the database
         public IActionResult Index()
         {
             IEnumerable<SemesterClasses> classes = _context.SemesterClasses.FromSql(
@@ -31,6 +32,7 @@ namespace ISStudySpot.Controllers
             return View(classes);
         }
 
+        // Displays a summary of the most recent notes separated by note type
         public IActionResult studyresources(int? id, string name)
         {
             IEnumerable<ClassInformation> classinformation = _context.ClassInformation.FromSql(
@@ -59,6 +61,7 @@ namespace ISStudySpot.Controllers
             return View(classinformation);
         }
 
+        // Displays information associated with any particular thread
         public IActionResult post(int? id, string name)
         {
             IEnumerable<PostInformation> postinformation = _context.PostInformation.FromSql(
