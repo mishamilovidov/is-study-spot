@@ -61,11 +61,11 @@
             <div class="col-md-12">
                 @if (Context.User.Identity.IsAuthenticated)
                 {
-                    <!--<a asp-controller="classes" asp-action="postComment" asp-route-id="@ViewBag.ClassNoteId" asp-route-username="@ViewBag.Email" asp-route-fname="@ViewBag.GivenName" asp-route-lname="@ViewBag.Surname">
+                    <a asp-controller="classes" asp-action="postComment" asp-route-id="@ViewBag.ClassNoteId" asp-route-title="@ViewBag.ClassNoteTitle" asp-route-fname="@ViewBag.StudFirstName" asp-route-lname="@ViewBag.StudLastName" asp-route-cdate="@ViewBag.ClassNoteCreateDate" asp-route-text="@ViewBag.ClassNoteText">
                         <button type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-comment" style="margin-right:5px;" aria-hidden="true"></span>  Comment</button>
-                    </a>-->
+                    </a>
 
-                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#MyModal"><span class="glyphicon glyphicon-comment" style="margin-right:5px;" aria-hidden="true"></span>  Comment</button>
+                    <!--<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#MyModal"><span class="glyphicon glyphicon-comment" style="margin-right:5px;" aria-hidden="true"></span>  Comment</button>-->
                 }
                 else
                 {
@@ -142,12 +142,11 @@
 
                                 document.getElementById("comment-form").removeAttribute("asp-route-comment");
 
-                                document.getElementById("comment-form").setAttribute("asp-route-comment","testz");
+                                document.getElementById("comment-form").setAttribute("asp-route-comment",comment);
 
                                 console.log(comment);
                             }
                         </script>
-                        <script>document.write(comment);</script>
                     </form>
                 </div>
             </div>

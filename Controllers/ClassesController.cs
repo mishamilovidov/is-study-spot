@@ -96,42 +96,64 @@ namespace ISStudySpot.Controllers
             return View(postinformation);
         }
 
-        [HttpPost]
-        [Authorize]
-        public IActionResult postComment(int id, string username, string fname, string lname, string comment)
+        public IActionResult postComment(int id, string title, string fname, string lname, string cdate, string text)
         {
+            ViewBag.ClassNoteId = id;
+            ViewBag.ClassNoteTitle = title;
+            ViewBag.StudFirstName = fname;
+            ViewBag.StudLastName = lname;
+            ViewBag.ClassNoteCreateDate = cdate;
+            ViewBag.ClassNoteText = text;
+            
+            return View();
+        }
 
-            // string n = String.Format("{0}", Request.Form["comment"]);
-
-            try
+        [HttpPost]
+        public async Task<IActionResult> postComment(int id, string username, string fname, string lname, IFormCollection data)
+        {
+            if (ModelState.IsValid) 
             {
-                Random rnd = new Random();
-                int newID = rnd.Next(1000);
-                int newStudentID = rnd.Next(1000);
+                foreach (string description in data.Keys)
+                {
+                    if (description.Equals("ClassNoteCommentText"))
+                    {
+                        var commentText = data[description];
 
-                DateTime now = DateTime.Now;
+                        try
+                        {
+                            Random rnd = new Random();
+                            int newID = rnd.Next(1000);
+                            int newStudentID = rnd.Next(1000);
 
-                _context.Database.ExecuteSqlCommand(
-                    "INSERT INTO Accounts (AccountID,AccountUserName) " +
-                    "VALUES ('" + newID + "','" + username + "')");
+                            DateTime now = DateTime.Now;
 
-                _context.Database.ExecuteSqlCommand(
-                    "INSERT INTO Students (StudentID,StudFirstName,StudLastName,AccountID) " +
-                    "VALUES ('" + newStudentID + "','" + fname + "','" + lname + "','" + newID + "')");
+                            _context.Database.ExecuteSqlCommand(
+                                "INSERT INTO Accounts (AccountID,AccountUserName) " +
+                                "VALUES ('" + newID + "','" + username + "')");
 
-                _context.Database.ExecuteSqlCommand(
-                    "INSERT INTO Class_Note_Comments (ClassNoteCommentCreateDate,ClassNoteID,StudentID,TeacherID,ClassNoteCommentText) " +
-                    "VALUES ('" + now + "','" + id + "', '" + newStudentID + "','" + 2 + "','" + comment + "')");
+                            _context.Database.ExecuteSqlCommand(
+                                "INSERT INTO Students (StudentID,StudFirstName,StudLastName,AccountID) " +
+                                "VALUES ('" + newStudentID + "','" + fname + "','" + lname + "','" + newID + "')");
 
-                return RedirectToAction("post", new RouteValueDictionary(
-                    new { controller = "Classes", action = "post", id = id })
-                );
+                            _context.Database.ExecuteSqlCommand(
+                                "INSERT INTO Class_Note_Comments (ClassNoteCommentCreateDate,ClassNoteID,StudentID,TeacherID,ClassNoteCommentText) " +
+                                "VALUES ('" + now + "','" + id + "', '" + newStudentID + "','" + 2 + "','" + commentText + "')");
+
+                            return RedirectToAction("post", new RouteValueDictionary(
+                                new { controller = "Classes", action = "post", id = id })
+                            );
+                        }
+                        catch (DbUpdateException /* ex */)
+                        {
+                            //Log the error (uncomment ex variable name and write a log.)
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                }
             }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("Index", "Home");
-            }
+
+            return RedirectToAction("Index", "Home");
+
         }
 
     }
