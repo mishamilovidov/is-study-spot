@@ -20,7 +20,10 @@
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "STORMPATH_CLIENT_APIKEY_ID": "5BK4V4GYQDQ9HY305SBFB46VJ",
+        "STORMPATH_CLIENT_APIKEY_SECRET": "GBukGelDARwAHxVV5QyXfoE6vGICl+MtBlGPejPCDCQ",
+        "STORMPATH_APPLICATION_HREF": "https://api.stormpath.com/v1/applications/5L7bZlJ6XwGKXNIjSWFOQQ"
       }
     }
   }

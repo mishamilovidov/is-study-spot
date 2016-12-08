@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Stormpath.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using ISStudySpot.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-
+using Stormpath.Configuration.Abstractions;
 
 namespace ISStudySpot
 {
@@ -35,15 +36,32 @@ namespace ISStudySpot
             var connection = "Data Source=sqlsv-instance1.ce61i890rwzw.us-west-2.rds.amazonaws.com,1433; Initial Catalog=ISStudySpot; Persist Security Info=True; User ID=sqlsv_i1_admin; Password=goKCaG86rsKVhtET3;";
         	services.AddDbContext<ISStudySpotContext>(options => options.UseSqlServer(connection));
 
+            services.AddStormpath(new StormpathConfiguration
+            {
+               Application = new ApplicationConfiguration
+               {
+                   Href = "https://api.stormpath.com/v1/applications/5L7bZlJ6XwGKXNIjSWFOQQ"
+               },
+               Client = new ClientConfiguration
+               {
+                   ApiKey = new ClientApiKeyConfiguration
+                   {
+                       Id = "5BK4V4GYQDQ9HY305SBFB46VJ",
+                       Secret = "GBukGelDARwAHxVV5QyXfoE6vGICl+MtBlGPejPCDCQ"
+                   }
+               }
+            });
+
             // Add framework services.
             services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory.AddDebug();            
 
             if (env.IsDevelopment())
             {
@@ -56,6 +74,8 @@ namespace ISStudySpot
             }
 
             app.UseStaticFiles();
+
+            app.UseStormpath();
 
             app.UseMvc(routes =>
             {

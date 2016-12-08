@@ -1,42 +1,121 @@
-@model RegisterViewModel
+@model Stormpath.Owin.Abstractions.ViewModel.RegisterFormViewModel
+@using System
+@using System.Linq
+@using Stormpath.Owin.Abstractions
+
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Create Account";
 }
 
-<h2>@ViewData["Title"].</h2>
+<div class="jumbotron">
+    <h2 class="text-center">@ViewData["Title"]</h2>
 
-<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <h4>Create a new account.</h4>
-    <hr />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="row">
+        <div class="col-md-12">
+            
+            <form method="post" role="form" class="registration-form form-horizontal sp-form">
+                <input name="@StringConstants.StateTokenName" type="hidden" value="@Model.StateToken"/>
+                @foreach (var field in Model.Form.Fields)
+                {
+                    <div form-group="true" class="form-group row @($"group-{field.Name}")">
+                        <div class="col-md-4">
+                        
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label">@field.Label</label>
+                            <input placeholder="@field.Placeholder"
+                                    name="@field.Name"
+                                    type="@field.Type"
+                                    class="form-control"
+                                    value="@(Model.FormData.Get(field.Name) ?? string.Empty)"
+                                    @(field.Required ? "required" : string.Empty)>
+                        </div>
+                        <div class="col-md-4">
+                        
+                        </div>
+                    </div>
+                }
+                <div class="form-group row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary" style="width:100%;margin-top:15px;">Create Account</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    
+                </div>
+            </form>
+            @if (Model.Errors.Any())
+            {
+                <div class="row ">
+                    @foreach (var error in Model.Errors)
+                    {
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="alert alert-danger bad-login">
+                                <b><span class="text-danger">@error</span></b>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        
+                    }
+                </div>
+            }
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Register</button>
-        </div>
-    </div>
-</form>
 
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+    <!--<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+        <div class="form-group row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="FirstName" class="control-label">First Name</label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <b><span asp-validation-for="FirstName" class="text-danger"></span></b>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="LastName" class="control-label">Last Name</label>
+                        <input asp-for="LastName" class="form-control" />
+                        <b><span asp-validation-for="LastName" class="text-danger"></span></b>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <b><span asp-validation-for="Email" class="text-danger"></span></b>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <b><span asp-validation-for="Password" class="text-danger"></span></b>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label asp-for="ConfirmPassword" class="control-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <b><span asp-validation-for="ConfirmPassword" class="text-danger"></span></b>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary pull-right">Register</button>
+                    </div>
+                </div>
+        </div>
+    </form>-->
+</div>

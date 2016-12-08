@@ -1,0 +1,9 @@
+---
+application:
+  name: "IS Study Spot"
+
+web:
+    login:
+        view: "~/Views/Account/Login.cshtml"
+    register:
+        view: "~/Views/Account/Register.cshtml"

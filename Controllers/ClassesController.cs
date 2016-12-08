@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ISStudySpot.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ISStudySpot.Controllers
 {
@@ -61,6 +62,8 @@ namespace ISStudySpot.Controllers
             return View(classinformation);
         }
 
+        [HttpGet]
+        [Authorize]
         // Displays information associated with any particular thread
         public IActionResult post(int? id, string name)
         {

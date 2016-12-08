@@ -8,11 +8,24 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ISStudySpot.Controllers
 {
-    public class AboutController : Controller
+    [Authorize]
+    public class AccountController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult Notifications()
+        {
+            return View();
+        }
+
+        public IActionResult Posts()
+        {
+            return View();
+        }
+
+        
     }
 }
