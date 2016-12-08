@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using ISStudySpot.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
 
 namespace ISStudySpot.Controllers
 {
@@ -93,5 +95,44 @@ namespace ISStudySpot.Controllers
 
             return View(postinformation);
         }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult postComment(int id, string username, string fname, string lname, string comment)
+        {
+
+            // string n = String.Format("{0}", Request.Form["comment"]);
+
+            try
+            {
+                Random rnd = new Random();
+                int newID = rnd.Next(1000);
+                int newStudentID = rnd.Next(1000);
+
+                DateTime now = DateTime.Now;
+
+                _context.Database.ExecuteSqlCommand(
+                    "INSERT INTO Accounts (AccountID,AccountUserName) " +
+                    "VALUES ('" + newID + "','" + username + "')");
+
+                _context.Database.ExecuteSqlCommand(
+                    "INSERT INTO Students (StudentID,StudFirstName,StudLastName,AccountID) " +
+                    "VALUES ('" + newStudentID + "','" + fname + "','" + lname + "','" + newID + "')");
+
+                _context.Database.ExecuteSqlCommand(
+                    "INSERT INTO Class_Note_Comments (ClassNoteCommentCreateDate,ClassNoteID,StudentID,TeacherID,ClassNoteCommentText) " +
+                    "VALUES ('" + now + "','" + id + "', '" + newStudentID + "','" + 2 + "','" + comment + "')");
+
+                return RedirectToAction("post", new RouteValueDictionary(
+                    new { controller = "Classes", action = "post", id = id })
+                );
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.)
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
     }
 }

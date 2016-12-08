@@ -1,5 +1,7 @@
 @model IEnumerable<ISStudySpot.Models.PostInformation>
 
+@inject Stormpath.SDK.Account.IAccount Account
+
 @{
     foreach (var item in Model)
     {
@@ -13,9 +15,14 @@
         ViewBag.SemesterName = item.SemesterName;
         ViewBag.SubjectCode = item.SubjectCode;
         ViewBag.ClassId = item.ClassId;
+        ViewBag.ClassNoteId = item.ClassNoteId;
     }
 
     ViewData["Title"] = @ViewBag.ClassNoteTitle;
+
+    ViewBag.Email = Account.Email;
+    ViewBag.GivenName = Account.GivenName;
+    ViewBag.Surname = Account.Surname;
 }
 
 @if (Model != null)
@@ -54,6 +61,10 @@
             <div class="col-md-12">
                 @if (Context.User.Identity.IsAuthenticated)
                 {
+                    <!--<a asp-controller="classes" asp-action="postComment" asp-route-id="@ViewBag.ClassNoteId" asp-route-username="@ViewBag.Email" asp-route-fname="@ViewBag.GivenName" asp-route-lname="@ViewBag.Surname">
+                        <button type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-comment" style="margin-right:5px;" aria-hidden="true"></span>  Comment</button>
+                    </a>-->
+
                     <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#MyModal"><span class="glyphicon glyphicon-comment" style="margin-right:5px;" aria-hidden="true"></span>  Comment</button>
                 }
                 else
@@ -102,25 +113,42 @@
                         <h3 class="modal-title">@ViewBag.ClassNoteTitle</h3>
                         <h5>Submitted by @ViewBag.StudFirstName @ViewBag.StudLastName - @ViewBag.ClassNoteCreateDate</h5>
                     </div>
-                    <div class="modal-body modal-body-adjustments">
-                        <div class="row class-note-text">
-                            <div class="col-md-12 well">
-                                <p>@ViewBag.ClassNoteText</p>
+                    <form asp-controller="classes" asp-action="postComment" asp-route-id="@ViewBag.ClassNoteId" asp-route-username="@ViewBag.Email" asp-route-fname="@ViewBag.GivenName" asp-route-lname="@ViewBag.Surname" method="post" class="form-horizontal" role="form" id="comment-form">
+                        <div class="modal-body modal-body-adjustments">
+                            <div class="row class-note-text">
+                                <div class="col-md-12 well">
+                                    <p>@ViewBag.ClassNoteText</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 comment-area">
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="15" id="comment"></textarea>
+                            <div class="row">
+                                <div class="col-md-12 comment-area">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <textarea class="form-control" rows="15" id="comment-area" onkeyup="formChanged()" onchange="formChanged()"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a asp-area="" asp-controller="order" asp-action="Index">
-                            <button type="submit" class="btn btn-primary">Post Comment <span class="glyphicon glyphicon-send" style="margin-left:5px;" aria-hidden="true"></span></button>
-                        </a>
-                    </div>
+                        <div class="modal-footer">
+                            <a asp-area="" asp-controller="classes" asp-action="Index">
+                                <button type="submit" class="btn btn-primary">Post Comment <span class="glyphicon glyphicon-send" style="margin-left:5px;" aria-hidden="true"></span></button>
+                            </a>
+                        </div>
+                        <script>
+                            function formChanged() 
+                            {
+                                var comment = document.getElementById("comment-area");
+
+                                document.getElementById("comment-form").removeAttribute("asp-route-comment");
+
+                                document.getElementById("comment-form").setAttribute("asp-route-comment","testz");
+
+                                console.log(comment);
+                            }
+                        </script>
+                        <script>document.write(comment);</script>
+                    </form>
                 </div>
             </div>
         </div> 
